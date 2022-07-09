@@ -1,5 +1,7 @@
 const http = require("http")
 const fs = require("fs")
+const { homedir } = require("os")
+const { isAbsolute } = require("path")
 
 const server= http.createServer((req, res) => {
     // console.log("req made")
@@ -12,7 +14,19 @@ const server= http.createServer((req, res) => {
 //     res.end()
 
 // sending html file
- fs.readFile("./html/first.html", (err, data) => {
+let path = "./html/"
+switch(req.url){
+    case "/":
+        path += "home.html"
+        break;
+    case "/about":
+        path += "about.html"
+        break;
+    default:
+        path += "404.html"        
+}
+
+ fs.readFile(path, (err, data) => {
     if(err){
         console.log("err")
         res.end()
