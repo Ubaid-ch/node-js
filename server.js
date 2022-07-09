@@ -18,12 +18,16 @@ let path = "./html/"
 switch(req.url){
     case "/":
         path += "home.html"
+        res.statusCode= 200;
         break;
     case "/about":
         path += "about.html"
+        res.statusCode= 200;
         break;
     default:
-        path += "404.html"        
+        path += "404.html" 
+        res.statusCode= 404;
+        break;       
 }
 
  fs.readFile(path, (err, data) => {
